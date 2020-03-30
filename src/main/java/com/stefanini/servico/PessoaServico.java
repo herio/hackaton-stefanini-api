@@ -1,16 +1,20 @@
 package com.stefanini.servico;
 
-import com.stefanini.dao.PessoaDao;
-import com.stefanini.exception.NegocioException;
-import com.stefanini.model.Pessoa;
-
-import javax.ejb.*;
-import javax.inject.Inject;
-import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
+
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+import javax.inject.Inject;
+import javax.validation.Valid;
+
+import com.stefanini.dao.PessoaDao;
+import com.stefanini.exception.NegocioException;
+import com.stefanini.model.Pessoa;
 
 /**
  * 
@@ -23,7 +27,6 @@ import java.util.logging.Logger;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class PessoaServico implements Serializable {
-
 
 	/**
 	 * 
@@ -43,18 +46,19 @@ public class PessoaServico implements Serializable {
 	public Pessoa salvar(@Valid Pessoa pessoa) {
 		return dao.salvar(pessoa);
 	}
+
 	/**
 	 * Validando se existe pessoa com email
 	 */
-	public Boolean validarPessoa(@Valid Pessoa pessoa){
-		if(pessoa.getId() != null){
+	public Boolean validarPessoa(@Valid Pessoa pessoa) {
+		if (pessoa.getId() != null) {
 			Optional<Pessoa> encontrar = dao.encontrar(pessoa.getId());
-			if(encontrar.get().getEmail().equals(pessoa.getEmail())){
+			if (encontrar.get().getEmail().equals(pessoa.getEmail())) {
 				return Boolean.TRUE;
 			}
 		}
 		Optional<Pessoa> pessoa1 = dao.buscarPessoaPorEmail(pessoa.getEmail());
-		return pessoa1.isEmpty();
+		return !pessoa1.isPresent();
 	}
 
 	/**
@@ -70,7 +74,7 @@ public class PessoaServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void remover(@Valid Long id) throws NegocioException {
-		if(pessoaPerfilServico.buscarPessoaPerfil(id,null).count() == 0){
+		if (pessoaPerfilServico.buscarPessoaPerfil(id, null).count() == 0) {
 			dao.remover(id);
 			return;
 		}
