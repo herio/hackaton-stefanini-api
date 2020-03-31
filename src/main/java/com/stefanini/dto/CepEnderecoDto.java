@@ -23,6 +23,15 @@ public class CepEnderecoDto implements Serializable {
 	private String unidade;
 	private String ibge;
 	private String gia;
+	private String erro;
+
+	public String getErro() {
+		return erro;
+	}
+
+	public void setErro(String erro) {
+		this.erro = erro;
+	}
 
 	public String getCep() {
 		return cep;
