@@ -60,7 +60,7 @@ public class PessoaResource {
 
 	@GET
 	@Path("paginado")
-	public Response obterPessoasPaginado(@QueryParam("pageNumber") Integer pageNumber, @QueryParam("pageNumber") Integer pageSize) {
+	public Response obterPessoasPaginado(@QueryParam("pageNumber") Integer pageNumber, @QueryParam("pageSize") Integer pageSize) {
 		return Response.ok(pessoaServico.listarPessoasPaginado(pageNumber, pageSize)).build();
 	}
 
