@@ -96,4 +96,8 @@ public class PessoaServico implements Serializable {
 		return dao.encontrar(id);
 	}
 
+	public List<Pessoa> listarPessoasPaginado(Integer pageNumber, Integer pageSize) {
+		return dao.listarPessoasPaginado(pageNumber, pageSize);
+	}
+
 }
