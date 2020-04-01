@@ -20,7 +20,6 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 @Path("/pessoa/{id}/file")
 public class PessoaFileUploadResource {
-	private final String UPLOADED_FILE_PATH = "d:\\";
 
 	@POST
 	@Path("/upload")
@@ -37,7 +36,8 @@ public class PessoaFileUploadResource {
 				InputStream inputStream = inputPart.getBody(InputStream.class, null);
 				byte[] bytes = IOUtils.toByteArray(inputStream);
 				// constructs upload file path
-				fileName = UPLOADED_FILE_PATH + fileName;
+				String raiz = System.getProperty("user.home");
+				fileName = raiz + fileName;
 				writeFile(bytes, fileName);
 				System.out.println("Done");
 			} catch (IOException e) {
