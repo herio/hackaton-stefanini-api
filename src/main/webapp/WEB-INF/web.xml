@@ -6,17 +6,22 @@
 
 
 	<module-name>treinamento</module-name>
-	
-	<servlet>
-	  <servlet-name>com.stefanini.ConfigApplication</servlet-name>
-	  <init-param>
-	      <param-name>javax.ws.rs.Application</param-name>
-	      <param-value>com.stefanini.ConfigApplication</param-value>
-	  </init-param>
-	  <load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-	    <servlet-name>com.stefanini.ConfigApplication</servlet-name>
-	    <url-pattern>/*</url-pattern>
-	</servlet-mapping>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <servlet>
+        <servlet-name>Resteasy</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>com.stefanini.ConfigApplication</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Resteasy</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

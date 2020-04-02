@@ -9,9 +9,10 @@ import javax.ws.rs.core.Application;
 import com.stefanini.resource.CepResource;
 import com.stefanini.resource.EnderecoResource;
 import com.stefanini.resource.PerfilResource;
+import com.stefanini.resource.PessoaIMagemUploadResource;
 import com.stefanini.resource.PessoaResource;
 
-@ApplicationPath("app")
+@ApplicationPath("/*")
 public class ConfigApplication extends Application {
 	public Set<Class<?>> getClasses() {
 		Set<Class<?>> s = new HashSet<Class<?>>();
@@ -19,6 +20,7 @@ public class ConfigApplication extends Application {
 		s.add(EnderecoResource.class);
 		s.add(PerfilResource.class);
 		s.add(PessoaResource.class);
+		s.add(PessoaIMagemUploadResource.class);
 		return s;
 	}
 }

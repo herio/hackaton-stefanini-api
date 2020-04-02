@@ -52,6 +52,11 @@ public class Pessoa implements Serializable {
 	@Column(name = "DS_EMAIL")
 	private String email;
 	/**
+	 * Imagem da Pessoa
+	 */
+	@Column(name = "DS_CAMINHO_IMAGEM")
+	private String caminhoImagem;
+	/**
 	 * Data de Nascimento
 	 */
 	@NotNull
@@ -68,14 +73,14 @@ public class Pessoa implements Serializable {
 	 * Mapeamento de Enderecos Unidirecional
 	 */
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "CO_SEQ_PESSOA", referencedColumnName = "CO_SEQ_PESSOA")
 	private Set<Endereco> enderecos = new HashSet<>();
 
 	/**
 	 * Mapeamento de Perfis Unidirecional
 	 */
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "TB_PESSOA_PERFIL", joinColumns = { @JoinColumn(name = "CO_SEQ_PESSOA") }, inverseJoinColumns = {
 			@JoinColumn(name = "CO_SEQ_PERFIL") })
 	private Set<Perfil> perfils = new HashSet<>();
@@ -84,6 +89,14 @@ public class Pessoa implements Serializable {
 	 * Metodo construtor da classe
 	 */
 	public Pessoa() {
+	}
+
+	public String getCaminhoImagem() {
+		return caminhoImagem;
+	}
+
+	public void setCaminhoImagem(String caminhoImagem) {
+		this.caminhoImagem = caminhoImagem;
 	}
 
 	public Set<Perfil> getPerfils() {
