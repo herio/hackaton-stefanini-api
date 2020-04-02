@@ -23,7 +23,7 @@ import com.stefanini.model.Pessoa;
 import com.stefanini.servico.PessoaServico;
 
 @Path("pessoas/{id}/imagem")
-public class PessoaIMagemUploadResource {
+public class PessoaImagemUploadResource {
 
 	@Inject
 	private PessoaServico pessoaServico;
