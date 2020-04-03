@@ -55,7 +55,7 @@ public class Pessoa implements Serializable {
 	 * Imagem da Pessoa
 	 */
 	@Column(name = "DS_CAMINHO_IMAGEM")
-	private String caminhoImagem;
+	private String imagem;
 	/**
 	 * Data de Nascimento
 	 */
@@ -91,12 +91,12 @@ public class Pessoa implements Serializable {
 	public Pessoa() {
 	}
 
-	public String getCaminhoImagem() {
-		return caminhoImagem;
+	public String getImagem() {
+		return imagem;
 	}
 
-	public void setCaminhoImagem(String caminhoImagem) {
-		this.caminhoImagem = caminhoImagem;
+	public void setImagem(String caminhoImagem) {
+		this.imagem = caminhoImagem;
 	}
 
 	public Set<Perfil> getPerfils() {

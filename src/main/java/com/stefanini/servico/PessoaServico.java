@@ -103,7 +103,7 @@ public class PessoaServico implements Serializable {
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Pessoa atualizarCaminhoImagemPessoa(Long id, String caminhoImagem) {
 		Pessoa pessoa = dao.encontrar(id).get();
-		pessoa.setCaminhoImagem(caminhoImagem);
+		pessoa.setImagem(caminhoImagem);
 		return dao.atualizar(pessoa);
 	}
 
