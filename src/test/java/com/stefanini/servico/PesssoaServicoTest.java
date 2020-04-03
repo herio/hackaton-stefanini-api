@@ -1,34 +1,30 @@
 package com.stefanini.servico;
 
-import static org.mockito.Mockito.when;
-
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import com.stefanini.dao.PessoaDao;
 import com.stefanini.model.Pessoa;
 
-@RunWith(MockitoJUnitRunner.class)
+import mockit.Expectations;
+import mockit.Injectable;
+import mockit.Mocked;
+import mockit.Tested;
+
 public class PesssoaServicoTest {
-	@InjectMocks
-	private PessoaServico pessoaServico;
-
-	@Mock
-	private PessoaDao pessoaDao;
-
-	@Before
-	public void setUp() throws Exception {
-		pessoaServico = new PessoaServico();
-		MockitoAnnotations.initMocks(this);
-	}
+	@Injectable
+	EntityManager em;
+	@Tested
+	PessoaServico pessoaServico;
+	@Injectable
+	@Mocked
+	PessoaDao pessoaDao;
+	@Injectable
+	PessoaPerfilServico pessoaPerfilServico;
 
 	@Test
 	public void atualizarCaminhoImagemPessoaTest() {
@@ -38,8 +34,18 @@ public class PesssoaServicoTest {
 		String caminhoImagem = "caminhoImagem";
 		pessoaAtualizada.setImagem(caminhoImagem);
 		Optional<Pessoa> pessoaOpt = Optional.of(pessoa);
-		when(pessoaDao.encontrar(1L)).thenReturn(pessoaOpt);
-		when(pessoaDao.atualizar(pessoa)).thenReturn(pessoaAtualizada);
+		new Expectations() {
+			{
+				pessoaDao.encontrar(1L);
+				result = pessoaOpt;
+			}
+		};
+		new Expectations() {
+			{
+				pessoaDao.atualizar(pessoa);
+				result = pessoaAtualizada;
+			}
+		};
 
 		// faz a chamada ao método a ser testado
 		Pessoa pessoaRetornada = pessoaServico.atualizarCaminhoImagemPessoa(1L, caminhoImagem);
